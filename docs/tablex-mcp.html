@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<html lang="en" class="coal sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>tablex-mcp - tablex documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="How to install and use tablex, a fast native database client for macOS.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#0f0f12">
+
+        <link rel="icon" href="favicon-dd0cc40a.svg">
+        <link rel="shortcut icon" href="favicon-4f516183.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/tablex-7b77ac2c.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "coal";
+            const default_dark_theme = "coal";
+            window.path_to_searchindex_js = "searchindex-5fb4d6fb.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-79bf3eb2.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('coal')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Dark</button></li>
+                            </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <a class="brand" href="index.html"><img src="logo.png" alt="" width="22" height="22"><span>tablex</span><span class="brand-docs">Docs</span></a>
+                    <div class="menu-spacer"></div>
+
+                    <div class="right-buttons">
+                        <a class="site-link" href="../">Home</a>
+                        <a class="site-link download" href="https://github.com/tablex-org/tablex/releases/latest">Download</a>
+                        <a href="https://github.com/tablex-org/tablex" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="tablex-mcp"><a class="header" href="#tablex-mcp">tablex-mcp</a></h1>
+<p><code>tablex-mcp</code> is a small program that lets AI tools use your saved tablex connections. It speaks the Model Context Protocol (MCP) over standard input and output. Your MCP client starts it, for example Claude Code, Claude Desktop or Cursor.</p>
+<p>For each connection, you decide how far an AI tool may go. By default, it may do nothing.</p>
+<h2 id="install-it"><a class="header" href="#install-it">Install it</a></h2>
+<ol>
+<li>Open <strong>Driver Manager</strong>. See <a href="drivers.html">Drivers</a>.</li>
+<li>Click the <strong>Tools</strong> chip.</li>
+<li>Find <strong>tablex MCP server</strong> and click <strong>Install</strong>.</li>
+</ol>
+<p>tablex installs it at a path that does not change when you update it, so an MCP client keeps working after an update:</p>
+<pre><code class="language-text">~/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp
+</code></pre>
+<p>The row shows the full path. On macOS, tablex then starts the Keychain step by itself. See <a href="#allow-keychain-access">Allow Keychain access</a>.</p>
+<!-- screenshot: the tablex MCP server row in Driver Manager > Tools, with its buttons -->
+<h2 id="connect-your-mcp-client"><a class="header" href="#connect-your-mcp-client">Connect your MCP client</a></h2>
+<p>The installed row has three buttons: <strong>Copy client configuration</strong>, <strong>Copy Claude Code command</strong>, and <strong>Allow Keychain access</strong>.</p>
+<h3 id="claude-code"><a class="header" href="#claude-code">Claude Code</a></h3>
+<ol>
+<li>Click <strong>Copy Claude Code command</strong> in Driver Manager.</li>
+<li>Paste it into Terminal and run it. It looks like this, with the path of your Mac:</li>
+</ol>
+<pre><code class="language-sh">claude mcp add tablex -- '/Users/you/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp'
+</code></pre>
+<h3 id="claude-desktop-and-cursor"><a class="header" href="#claude-desktop-and-cursor">Claude Desktop and Cursor</a></h3>
+<ol>
+<li>Click <strong>Copy client configuration</strong> in Driver Manager.</li>
+<li>Paste it into the MCP server settings of your client. If the client already has an <code>mcpServers</code> section, add only the <code>tablex</code> entry to it. The clients’ own documentation says where that file is.</li>
+</ol>
+<p>The text is this, with the path of your Mac:</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "tablex": {
+      "command": "/Users/you/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp",
+      "args": []
+    }
+  }
+}
+</code></pre>
+<h3 id="any-other-client"><a class="header" href="#any-other-client">Any other client</a></h3>
+<p>Most MCP clients take the same <code>mcpServers</code> block. You can also print it from Terminal:</p>
+<pre><code class="language-sh">'/Users/you/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp' --print-config
+</code></pre>
+<p><code>tablex-mcp</code> takes no arguments when a client starts it. It also understands <code>--version</code>, <code>--help</code>, <code>--print-config</code>, and <code>--authorize-keychain</code>.</p>
+<p>After you add the server, restart your MCP client.</p>
+<h2 id="agent-access-levels"><a class="header" href="#agent-access-levels">Agent access levels</a></h2>
+<p>Each connection has an agent access level. It applies to the MCP clients and to the <a href="assistant.html">AI assistant</a>. There are four levels:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Level</th><th>What an AI tool can do</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Off</strong></td><td>Nothing. This is the default.</td></tr>
+<tr><td><strong>Schema only</strong></td><td>See table, column and routine definitions. It never sees rows.</td></tr>
+<tr><td><strong>Read</strong></td><td>Also run statements that only read data.</td></tr>
+<tr><td><strong>Read and write</strong></td><td>Also propose statements that change data. You approve each one first. See <a href="#approvals-for-changes">Approvals for changes</a>.</td></tr>
+</tbody>
+</table>
+</div>
+<p>Even when a connection is <strong>Off</strong>, the client can still list the names of your connections.</p>
+<h3 id="where-to-set-the-level"><a class="header" href="#where-to-set-the-level">Where to set the level</a></h3>
+<ul>
+<li><strong>One connection:</strong> open <strong>Edit Connection</strong>, go to the <strong>Overrides</strong> tab, and find <strong>Agent access</strong>. Clear <strong>Use default</strong> and choose a level. Under it, tablex shows <strong>Resulting level</strong>, and where the level comes from.</li>
+<li><strong>All connections:</strong> <strong>Settings → AI Assistant → Default agent access</strong>.</li>
+<li><strong>All connections of one type:</strong> <strong>Settings → Query &amp; Connections</strong>, then <strong>CONNECTION TYPES</strong>, then <strong>Agent access</strong> of the type.</li>
+</ul>
+<h3 id="how-the-level-is-decided"><a class="header" href="#how-the-level-is-decided">How the level is decided</a></h3>
+<ol>
+<li>The connection’s own level wins.</li>
+<li>Without one, the connection uses the higher of its type’s level and the default for all connections. These two never grant more than <strong>Read</strong>.</li>
+<li>A <strong>Production</strong> connection stays <strong>Off</strong> until you set a level on the connection itself.</li>
+<li>A read-only type caps every connection at <strong>Read</strong>.</li>
+</ol>
+<p>Only you can raise a level, in tablex. An AI tool cannot.</p>
+<h2 id="approvals-for-changes"><a class="header" href="#approvals-for-changes">Approvals for changes</a></h2>
+<p>An AI tool can change data only when all of these are true:</p>
+<ol>
+<li><strong>Let MCP clients run changes</strong> is on in <strong>Settings → AI Assistant</strong>. It is off by default.</li>
+<li>The connection’s level is <strong>Read and write</strong>.</li>
+<li>The connection is not of the built-in <strong>Production</strong> type. A custom type is not treated as production.</li>
+<li>The MCP client can ask you a question. tablex uses the MCP elicitation feature for this.</li>
+<li>The statement is short enough to review: at most 200 lines, 8000 characters, and 400 characters in one line.</li>
+</ol>
+<p>If these are true, tablex asks the client to show you the statement, with the connection and database. The statement runs only if you accept. This is one question for each statement. For a script of several statements, you accept or decline all the changes together. A transaction has a question before it is committed.</p>
+<p>Keep in mind:</p>
+<ul>
+<li>The MCP client is your own program, and it decides how to show the question. A client set to answer by itself can run changes without you seeing them. Turn the switch on only for a client you trust.</li>
+<li>Statements flagged as dangerous are refused through MCP, whatever you answer.</li>
+<li>If you decline several times for one connection, or no usable answer comes back, changes to that connection through MCP stay off until <code>tablex-mcp</code> is restarted.</li>
+</ul>
+<p>Adding, copying and removing connections through an AI tool also needs your approval each time. The question is <strong>Make this change to your connections</strong>.</p>
+<p>Every call an AI tool makes is written to an audit log, <code>audit.jsonl</code>, in tablex’s data folder.</p>
+<h3 id="show-something-in-tablex"><a class="header" href="#show-something-in-tablex">Show something in tablex</a></h3>
+<p>An AI tool can ask the running tablex app to open a table (<code>open_table</code>) or to show a query and run it (<code>execute_and_show</code>). tablex must be running for this. The app applies its own rules to the query.</p>
+<h2 id="allow-keychain-access"><a class="header" href="#allow-keychain-access">Allow Keychain access</a></h2>
+<p>tablex keeps saved passwords encrypted, with one master key in the macOS Keychain. See <a href="connections.html#where-secrets-are-stored">Where secrets are stored</a>. <code>tablex-mcp</code> is a separate program, so macOS asks once whether it may read that key.</p>
+<p>While <code>tablex-mcp</code> runs for a client, it never lets macOS ask. A dialog would appear behind your client, and the AI tool would wait for it. So you answer the question once, in advance.</p>
+<ol>
+<li>Open <strong>Driver Manager → Tools</strong>.</li>
+<li>On the <strong>tablex MCP server</strong> row, click <strong>Allow Keychain access</strong>.</li>
+<li>When macOS asks, choose <strong>Always Allow</strong>.</li>
+<li>Restart your MCP client.</li>
+</ol>
+<p>What the button does:</p>
+<ol>
+<li>It moves the passwords saved by earlier versions of tablex into tablex’s own store. macOS asks once for each of those.</li>
+<li>It runs <code>tablex-mcp --authorize-keychain</code>, which reads the master key and the saved passwords of the connections that AI tools may use. macOS asks for the master key.</li>
+</ol>
+<p>You can also run the second step in Terminal:</p>
+<pre><code class="language-sh">'/Users/you/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp' --authorize-keychain
+</code></pre>
+<p>It prints one line for each connection, and then <strong>Keychain access is allowed for</strong> the number of connections. If it says <strong>access was not kept for background use</strong>, run it again and choose <strong>Always Allow</strong>.</p>
+<p>Only connections with a level above <strong>Off</strong> are read. If none has one, the command says there is nothing to allow. So give at least one connection a level above <strong>Off</strong> first. See <a href="#agent-access-levels">Agent access levels</a>.</p>
+<h3 id="after-an-update"><a class="header" href="#after-an-update">After an update</a></h3>
+<p>tablex runs this step by itself after you install or update <code>tablex-mcp</code>. macOS may ask again after an update. Choose <strong>Always Allow</strong>, and restart your MCP client. If macOS asks later, click <strong>Allow Keychain access</strong> again.</p>
+<h2 id="update-it"><a class="header" href="#update-it">Update it</a></h2>
+<p>Update <code>tablex-mcp</code> in <strong>Driver Manager → Tools</strong>, like a driver. Then restart your MCP client.</p>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<p>The messages below come from <code>tablex-mcp</code>. Your client shows them to you or to the AI tool.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Message</th><th>What to do</th></tr>
+</thead>
+<tbody>
+<tr><td><code>tablex cannot read the saved password without asking macOS (or the login keychain is locked)</code></td><td>Click <strong>Allow Keychain access</strong> (above), then restart the client. If your login keychain is locked, unlock it first.</td></tr>
+<tr><td><code>agent access for connection ... is ...; ... needs ... or more</code></td><td>Raise the connection’s level. The message names the level it has: <code>off</code>, <code>schema_only</code>, <code>read</code> or <code>read_write</code>. See <a href="#where-to-set-the-level">Where to set the level</a>.</td></tr>
+<tr><td><code>... is a write ... and the agent access is ...; writes need read_write</code></td><td>Set <strong>Read and write</strong> on the connection. Then check the conditions in <a href="#approvals-for-changes">Approvals for changes</a>.</td></tr>
+<tr><td><code>changes through the MCP server are turned off in tablex: Settings → AI</code></td><td>Turn on <strong>Let MCP clients run changes</strong>.</td></tr>
+<tr><td><code>a production connection can only be changed from the tablex app</code></td><td>Make the change in tablex.</td></tr>
+<tr><td><code>this MCP client cannot ask the user</code></td><td>Your client does not support questions. Make the change in tablex.</td></tr>
+<tr><td><code>too long to be shown for approval through MCP</code></td><td>Run the statement in tablex yourself, or split it.</td></tr>
+<tr><td><code>The ... driver needed by ... is not installed</code></td><td>Install the driver in <strong>Driver Manager</strong>. See <a href="drivers.html">Drivers</a>.</td></tr>
+<tr><td><code>the audit log cannot be written, so writes are refused until it can; reads still work</code></td><td><code>tablex-mcp</code> cannot write <code>audit.jsonl</code> in the data folder. Check that the folder is writable.</td></tr>
+<tr><td>An error about reaching tablex when an AI tool opens a table</td><td>Start the tablex app. <code>open_table</code> and <code>execute_and_show</code> need it.</td></tr>
+</tbody>
+</table>
+</div>
+<p>If the client cannot start the server at all:</p>
+<ol>
+<li>Run <code>tablex-mcp --version</code> with the full path, in Terminal.</li>
+<li>Check that the path in your client’s configuration is the one on the <strong>tablex MCP server</strong> row. Copy the configuration again if it is not.</li>
+<li>Look at the client’s log. <code>tablex-mcp</code> writes its startup problems to standard error.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="connections.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="assistant.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="connections.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="assistant.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE HTML>
+<html lang="en" class="coal sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Connections - tablex documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="How to install and use tablex, a fast native database client for macOS.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#0f0f12">
+
+        <link rel="icon" href="favicon-dd0cc40a.svg">
+        <link rel="shortcut icon" href="favicon-4f516183.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/tablex-7b77ac2c.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "coal";
+            const default_dark_theme = "coal";
+            window.path_to_searchindex_js = "searchindex-5fb4d6fb.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-79bf3eb2.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('coal')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Dark</button></li>
+                            </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <a class="brand" href="index.html"><img src="logo.png" alt="" width="22" height="22"><span>tablex</span><span class="brand-docs">Docs</span></a>
+                    <div class="menu-spacer"></div>
+
+                    <div class="right-buttons">
+                        <a class="site-link" href="../">Home</a>
+                        <a class="site-link download" href="https://github.com/tablex-org/tablex/releases/latest">Download</a>
+                        <a href="https://github.com/tablex-org/tablex" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="connections"><a class="header" href="#connections">Connections</a></h1>
+<h2 id="add-a-connection"><a class="header" href="#add-a-connection">Add a connection</a></h2>
+<ol>
+<li>Install the driver for your database first. See <a href="drivers.html">Drivers</a>. If you skip this, tablex offers to install it when you need it.</li>
+<li>Click <strong>New Connection</strong> in the title bar, or choose <strong>File → New Connection</strong>.</li>
+<li>Choose the type of database. The picker groups the types (<strong>Relational</strong>, <strong>Analytics</strong>, <strong>Lightweight</strong>, <strong>Docs/Cache/Search</strong>). You can search, and switch between a grid and a list. Double-click a type, or select it and click <strong>Next</strong>.</li>
+<li>Fill in the fields. They are listed below for each database.</li>
+<li>Click <strong>Test</strong>. tablex tries to connect and says <strong>Connected in</strong> some milliseconds, or shows the error.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<!-- screenshot: the New Connection dialog, Connection tab, for PostgreSQL -->
+<p>To connect, right-click the connection in the sidebar and choose <strong>Connect</strong>. To change it later, choose <strong>Edit Connection</strong>.</p>
+<h3 id="fields-that-every-network-database-has"><a class="header" href="#fields-that-every-network-database-has">Fields that every network database has</a></h3>
+<p>These fields are on the <strong>Connection</strong> tab.</p>
+<ul>
+<li><strong>URL</strong>: paste a connection URL here, then click the link button (<strong>Parse the URL into the fields below</strong>). tablex fills in the fields. See <a href="#paste-a-url">Paste a URL</a>.</li>
+<li><strong>Name</strong>: the name in the sidebar.</li>
+<li><strong>Type</strong>: the database type. Click it to go back to the picker.</li>
+<li><strong>Environment</strong>: the connection type. See <a href="#connection-types">Connection types</a>.</li>
+<li><strong>Color</strong>: one of <strong>None</strong>, <strong>Green</strong>, <strong>Yellow</strong>, <strong>Orange</strong>, <strong>Red</strong>, <strong>Blue</strong>, <strong>Purple</strong>, or a custom color as <code>#rrggbb</code>. The color marks the connection in the sidebar and on its tab group.</li>
+<li><strong>Host</strong> and the port.</li>
+<li><strong>User</strong> and <strong>Password</strong>.</li>
+<li><strong>Save password</strong>: see <a href="#where-secrets-are-stored">Where secrets are stored</a>. If you clear it, tablex asks for the password when you connect, and keeps it in memory until you quit.</li>
+<li><strong>Database</strong>.</li>
+</ul>
+<h3 id="postgresql-mysql-and-mariadb"><a class="header" href="#postgresql-mysql-and-mariadb">PostgreSQL, MySQL and MariaDB</a></h3>
+<ul>
+<li><strong>Database</strong> is optional. For PostgreSQL the default is <code>postgres</code>.</li>
+<li><strong>Show only the connection’s database</strong>: the sidebar lists only the database named above. Without a database name, every database is listed.</li>
+<li><strong>URL Params</strong>: extra parameters for the URL, for example <code>application_name=tablex</code> for PostgreSQL.</li>
+</ul>
+<p>These databases also have the <strong>TLS/SSL</strong> tab. See <a href="#ssl-and-tls-options">SSL and TLS options</a>.</p>
+<h3 id="mongodb"><a class="header" href="#mongodb">MongoDB</a></h3>
+<ul>
+<li><strong>Database</strong> is optional.</li>
+<li><strong>Auth DB</strong>: the database to authenticate against, optional, often <code>admin</code>.</li>
+<li><strong>URL Params</strong>: extra parameters for the URL.</li>
+<li>A <code>mongodb+srv://</code> URL, or a URL with several hosts, is used as entered. The form shows a note, and the host and port fields are hidden.</li>
+</ul>
+<h3 id="redis"><a class="header" href="#redis">Redis</a></h3>
+<ul>
+<li><strong>Database</strong> is the database index, and defaults to <code>0</code>.</li>
+<li><strong>Use TLS (rediss://)</strong>: connect with TLS.</li>
+</ul>
+<p>Redis has no <strong>TLS/SSL</strong> tab. This checkbox is its TLS setting.</p>
+<h3 id="clickhouse"><a class="header" href="#clickhouse">ClickHouse</a></h3>
+<ul>
+<li><strong>Use HTTPS (TLS)</strong>: connect over HTTPS. If the port is empty, or still one of the defaults, it changes between <code>8123</code> (plain) and <code>8443</code> (HTTPS) with the checkbox. A port you typed yourself is kept.</li>
+<li><strong>CA Cert</strong>: an optional PEM file with the certificate authority to trust.</li>
+<li><strong>Database</strong> is optional, and defaults to <code>default</code>.</li>
+<li><strong>Show only the connection’s database</strong>: as for PostgreSQL.</li>
+<li><strong>Settings</strong>: ClickHouse settings, for example <code>max_execution_time=30&amp;async_insert=1</code>.</li>
+</ul>
+<p>ClickHouse has no <strong>TLS/SSL</strong> tab.</p>
+<h3 id="sqlite"><a class="header" href="#sqlite">SQLite</a></h3>
+<p>SQLite has a <strong>File Path</strong> field instead of host, port and password. Type the path, or click the folder button (<strong>Choose a database file</strong>). SQLite has no <strong>TLS/SSL</strong> or <strong>Tunnel / Proxy</strong> tab.</p>
+<h3 id="paste-a-url"><a class="header" href="#paste-a-url">Paste a URL</a></h3>
+<p>Paste the URL into <strong>URL</strong>, then click the link button. These schemes are accepted:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Database</th><th>Schemes</th></tr>
+</thead>
+<tbody>
+<tr><td>PostgreSQL</td><td><code>postgresql://</code>, <code>postgres://</code></td></tr>
+<tr><td>MySQL</td><td><code>mysql://</code></td></tr>
+<tr><td>MariaDB</td><td><code>mariadb://</code></td></tr>
+<tr><td>MongoDB</td><td><code>mongodb://</code>, <code>mongodb+srv://</code></td></tr>
+<tr><td>Redis</td><td><code>redis://</code>, <code>rediss://</code></td></tr>
+<tr><td>ClickHouse</td><td><code>clickhouse://</code>, <code>http://</code>, <code>https://</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>If the scheme does not match the type you chose, tablex says so and shows the one it expects. For example: <code>postgresql://user:password@host:5432/database</code>.</p>
+<h3 id="the-advanced-tab"><a class="header" href="#the-advanced-tab">The Advanced tab</a></h3>
+<ul>
+<li><strong>Timeout</strong>: how many seconds to wait while connecting. Leave it empty to use the driver’s default. It works for PostgreSQL and MongoDB.</li>
+<li><strong>Pin connection in sidebar</strong>. See <a href="#pin-a-connection">Pin a connection</a>.</li>
+</ul>
+<h3 id="the-overrides-tab"><a class="header" href="#the-overrides-tab">The Overrides tab</a></h3>
+<p>Each connection can have its own values for some settings. Each setting has a <strong>Use global</strong> checkbox. Clear it to give this connection its own value. The settings are <strong>Query timeout</strong>, <strong>Connect timeout</strong>, <strong>Connection keep-alive interval</strong>, <strong>Default page size</strong>, <strong>Confirm dangerous statements</strong>, and <strong>Agent access</strong>. For <strong>Agent access</strong>, see <a href="tablex-mcp.html#agent-access-levels">tablex-mcp</a>.</p>
+<h2 id="ssl-and-tls-options"><a class="header" href="#ssl-and-tls-options">SSL and TLS options</a></h2>
+<p>The <strong>TLS/SSL</strong> tab is for PostgreSQL, MySQL, MariaDB and MongoDB. The fields depend on the database.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>PostgreSQL</th><th>MySQL and MariaDB</th><th>MongoDB</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>SSL Mode</strong></td><td><code>Default (prefer)</code>, <code>disable</code>, <code>allow</code>, <code>prefer</code>, <code>require</code>, <code>verify-ca</code>, <code>verify-full</code></td><td><code>Default (PREFERRED)</code>, <code>DISABLED</code>, <code>allow</code>, <code>PREFERRED</code>, <code>REQUIRED</code>, <code>VERIFY_CA</code>, <code>VERIFY_IDENTITY</code></td><td><code>Default (off)</code>, <code>Off</code>, <code>On (verify certificate)</code>, <code>On (skip verification)</code></td></tr>
+<tr><td><strong>CA Certificate</strong></td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td><strong>Client Cert</strong></td><td>yes</td><td>yes</td><td>yes (one PEM file with the certificate and its key)</td></tr>
+<tr><td><strong>Client Key</strong></td><td>yes</td><td>yes</td><td>no</td></tr>
+<tr><td><strong>Server Name</strong></td><td>no</td><td>yes</td><td>no</td></tr>
+</tbody>
+</table>
+</div>
+<p>Fields a database does not use show <strong>Not used</strong>. Under the mode, tablex says in one line what the mode does. In short:</p>
+<ul>
+<li>The default and <code>prefer</code> encrypt when the server offers TLS. Otherwise they connect in clear text.</li>
+<li><code>require</code> needs TLS. It checks the certificate against the CA file only if you set one.</li>
+<li><code>verify-ca</code> checks the certificate chain against the CA file, but not the host name.</li>
+<li><code>verify-full</code> checks the chain and the host name.</li>
+</ul>
+<p>Key files must be unencrypted PEM files. Key passphrases are not supported. For PostgreSQL and MySQL/MariaDB, the key file must not be readable by group or others (<code>chmod 600</code>).</p>
+<p>For PostgreSQL, tablex checks the certificate against the <strong>Host</strong>. To reach another address, add <code>hostaddr</code> to <strong>URL Params</strong>.</p>
+<p>If you use a URL that is used as entered (a <code>mongodb+srv://</code> URL), put the TLS options in the URL itself.</p>
+<h2 id="ssh-tunnel-and-proxy"><a class="header" href="#ssh-tunnel-and-proxy">SSH tunnel and proxy</a></h2>
+<p>The <strong>Tunnel / Proxy</strong> tab opens the connection through an SSH server (a bastion). The SSH server reaches the database for you. The database host and port are reached from the SSH server. Each database session of the connection gets its own tunnel.</p>
+<h3 id="set-up-a-tunnel"><a class="header" href="#set-up-a-tunnel">Set up a tunnel</a></h3>
+<ol>
+<li>Open the <strong>Tunnel / Proxy</strong> tab and select <strong>Connect through an SSH tunnel</strong>.</li>
+<li>Fill in the server. You can choose a host from your <code>~/.ssh/config</code> in <strong>SSH Config</strong> (<strong>Use a ~/.ssh/config host</strong>). tablex fills in the fields and lists the keywords it does not apply. Or enter them yourself:
+<ul>
+<li><strong>SSH Host</strong> and its port (the default is 22)</li>
+<li><strong>SSH User</strong></li>
+</ul>
+</li>
+<li>Choose an <strong>Auth Method</strong>:
+<ul>
+<li><strong>Password</strong>: enter the <strong>Password</strong>.</li>
+<li><strong>Private key</strong>: choose the <strong>Private Key</strong> file, and enter the <strong>Passphrase</strong> if it has one.</li>
+<li><strong>SSH agent</strong>: signs in with the keys of your running <code>ssh-agent</code>.</li>
+<li><strong>Keyboard-interactive</strong>: the server’s questions (a one-time code, a second factor) appear in a dialog when you connect. All sessions of the connection share one tunnel, so you answer once.</li>
+</ul>
+</li>
+<li>Optional: select <strong>Save password</strong> (or <strong>Save passphrase</strong>) to keep it. If you do not save it, tablex asks when you connect and keeps it in memory only while the connection is open.</li>
+<li>Click <strong>Test tunnel</strong>. tablex says <strong>Tunnel works</strong> and how long it took, or shows the error.</li>
+</ol>
+<h3 id="more-options"><a class="header" href="#more-options">More options</a></h3>
+<ul>
+<li><strong>Jump hosts</strong>: click <strong>Add jump host</strong> to pass through other SSH servers before the SSH host. They are used in the order shown, and you can add up to 8. Each has its own host, port, user and authentication.</li>
+<li><strong>Remote Host</strong> and port: optional. Leave them empty to reach the database host and port of the connection from the SSH server.</li>
+<li><strong>Algorithms</strong>: <strong>Allow legacy algorithms (diffie-hellman-group14-sha1, ssh-rsa)</strong> for old servers.</li>
+</ul>
+<h3 id="host-keys"><a class="header" href="#host-keys">Host keys</a></h3>
+<p>The first time tablex connects to an SSH server, it asks <strong>Trust this host?</strong>. If you trust it, tablex remembers its key in its own <code>known_hosts</code> file. It only reads your <code>~/.ssh/known_hosts</code>. If a server’s key changes later, tablex stops the connection and says so.</p>
+<h3 id="proxy"><a class="header" href="#proxy">Proxy</a></h3>
+<p>Select <strong>Connect through a SOCKS5 or HTTP proxy</strong> to send the connection through a proxy first. Fill in <strong>Proxy Type</strong> (<strong>SOCKS5</strong> or <strong>HTTP CONNECT</strong>), <strong>Proxy Host</strong> and its port, and optionally <strong>Proxy User</strong> and <strong>Proxy Password</strong>. With an SSH tunnel, the proxy carries the connection to the first SSH server. Without one, it carries the connection to the database.</p>
+<h3 id="what-does-not-work-through-a-tunnel-or-proxy"><a class="header" href="#what-does-not-work-through-a-tunnel-or-proxy">What does not work through a tunnel or proxy</a></h3>
+<p>tablex refuses to save a connection that cannot use the route, and says why. A tunnel or a proxy does not work with:</p>
+<ul>
+<li>SQLite, which has no network address.</li>
+<li>A URL with several hosts.</li>
+<li>MongoDB with <code>mongodb+srv://</code>.</li>
+<li>MongoDB with TLS turned on.</li>
+<li>Redis with TLS (<code>rediss://</code>).</li>
+<li>ClickHouse with HTTPS.</li>
+</ul>
+<h2 id="connection-types"><a class="header" href="#connection-types">Connection types</a></h2>
+<p>A connection type gives its connections a color and safety settings. You choose it in the <strong>Environment</strong> field of the connection. A connection without a type follows the global settings only.</p>
+<p>tablex has three types:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Color</th><th>What it does by default</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Development</strong></td><td>green</td><td>Nothing extra.</td></tr>
+<tr><td><strong>Test</strong></td><td>blue</td><td>Nothing extra.</td></tr>
+<tr><td><strong>Production</strong></td><td>red</td><td>Asks before running SQL, and before applying data changes.</td></tr>
+</tbody>
+</table>
+</div>
+<p>The type shows as a small badge on the connection in the sidebar and on its tab group.</p>
+<p>Under <strong>Environment</strong>, tablex says what the type does, for example <em>Production: asks before running SQL, asks before applying data changes</em>.</p>
+<h3 id="change-a-type-or-add-your-own"><a class="header" href="#change-a-type-or-add-your-own">Change a type or add your own</a></h3>
+<ol>
+<li>Open <strong>Settings → Query &amp; Connections</strong>.</li>
+<li>Find <strong>CONNECTION TYPES</strong>. Select a type, or click <strong>Add type</strong>.</li>
+<li>Set the name (up to 32 characters) and the color (for example <code>#ef4444</code>).</li>
+<li>Switch the settings you want:
+<ul>
+<li><strong>Confirm SQL execution</strong>: every statement run from the SQL editor asks before it runs.</li>
+<li><strong>Confirm data changes</strong>: applying staged grid edits (or committing MongoDB changes) asks first and lists what will change.</li>
+<li><strong>Read-only</strong>: writes are refused (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, DDL, and grid edits). <code>SELECT</code> keeps working.</li>
+<li><strong>Auto-commit by default</strong>: SQL query tabs start in auto-commit. When it is off, they start in manual commit.</li>
+<li><strong>Smart commit</strong>, and <strong>Return to auto-commit after Commit / Roll Back</strong>.</li>
+<li><strong>Auto-close idle transactions</strong>: roll back a manual-commit transaction that has changes and stays idle (Development 30 minutes, Test 15 minutes, Production 10 minutes).</li>
+<li><strong>Agent access</strong>: how far AI tools may go on connections of this type. See <a href="tablex-mcp.html#agent-access-levels">tablex-mcp</a>.</li>
+</ul>
+</li>
+</ol>
+<p>Read-only is not on in any of the three types by default. Turn it on for a type to make all its connections read-only.</p>
+<h2 id="organize-connections"><a class="header" href="#organize-connections">Organize connections</a></h2>
+<h3 id="groups"><a class="header" href="#groups">Groups</a></h3>
+<ul>
+<li>Click the <strong>New group</strong> button in the sidebar to create a group.</li>
+<li>Right-click a group for <strong>New Subgroup</strong>, <strong>Select group connections</strong>, <strong>Rename Group</strong>, <strong>Move to Group</strong> and <strong>Delete Group</strong>. When you delete a group, its subgroups and connections move to the parent group.</li>
+<li>To move a connection, right-click it and choose <strong>Move to New Group</strong>, or drag it onto a group. You can also select several connections and use <strong>Group selected…</strong> or <strong>Move selected to group</strong>.</li>
+</ul>
+<h3 id="pin-a-connection"><a class="header" href="#pin-a-connection">Pin a connection</a></h3>
+<p>Right-click a connection, a database, a schema, a table, a view or a collection and choose <strong>Pin</strong>. It moves to the top of its group and gets a pin mark. It stays pinned after a restart. <strong>Unpin</strong> puts it back. For a connection you can also select <strong>Pin connection in sidebar</strong> on the <strong>Advanced</strong> tab.</p>
+<h3 id="hide-a-connection"><a class="header" href="#hide-a-connection">Hide a connection</a></h3>
+<ol>
+<li>Select the connection.</li>
+<li>Click the sort and filter button at the top of the sidebar (tooltip <strong>Sort connections / Filter by type</strong>).</li>
+<li>Under <strong>Selected connection</strong>, choose <strong>Hide / Unhide</strong>.</li>
+</ol>
+<p>To hide several at once, select them and choose <strong>Hide selected connections</strong>. To see hidden connections again, choose <strong>Show hidden connections</strong> in the same menu.</p>
+<h3 id="duplicate-a-connection"><a class="header" href="#duplicate-a-connection">Duplicate a connection</a></h3>
+<p>Right-click a connection and choose <strong>Duplicate Connection</strong>. The copy has no passwords, and its SSH tunnel and proxy are switched off. Review its options before you connect.</p>
+<h2 id="import-connections-from-other-tools"><a class="header" href="#import-connections-from-other-tools">Import connections from other tools</a></h2>
+<p>tablex can import connections from DBeaver, DataGrip, Navicat and DBX.</p>
+<ol>
+<li>
+<p>In the sidebar, click <strong>Import / Export</strong>.</p>
+</li>
+<li>
+<p>Choose the source: <strong>Import DBX Config</strong>, <strong>Import Navicat NCX</strong>, <strong>Import DBeaver</strong>, or <strong>Import DataGrip</strong>.</p>
+</li>
+<li>
+<p>Choose what to import:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Source</th><th>Choose</th></tr>
+</thead>
+<tbody>
+<tr><td>DBX</td><td>A connections export (<code>.json</code>). If it is protected by a passphrase, tablex asks for it (<strong>DBX export is encrypted</strong>) and you click <strong>Decrypt</strong>.</td></tr>
+<tr><td>Navicat</td><td>A connections export (<code>.ncx</code>).</td></tr>
+<tr><td>DBeaver</td><td>The DBeaver workspace folder, or its <code>data-sources.json</code>.</td></tr>
+<tr><td>DataGrip</td><td><code>dataSources.xml</code> in the project’s <code>.idea</code> folder, or the project folder.</td></tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>tablex lists the connections it found. Clear the ones you do not want, or use <strong>Select all</strong> and <strong>Select none</strong>. Types tablex does not support (for example Oracle) are listed but cannot be selected. The list shows which connections come with an SSH tunnel.</p>
+</li>
+<li>
+<p>Confirm. tablex saves the selected connections, and says how many it imported, how many it skipped, and how many were already saved.</p>
+</li>
+</ol>
+<p>Nothing is saved before you confirm. If you cancel at any step, nothing changes.</p>
+<p>Passwords are imported where the file holds them. DataGrip keeps passwords in its own keychain entries, which tablex does not read. Folders and groups of the other tools are not imported.</p>
+<h2 id="export-and-import-tablex-connections"><a class="header" href="#export-and-import-tablex-connections">Export and import tablex connections</a></h2>
+<p>You can move connections between computers, or share them, without passwords.</p>
+<h3 id="export"><a class="header" href="#export">Export</a></h3>
+<ol>
+<li>Select the connections in the sidebar.</li>
+<li>Click <strong>Import / Export</strong> and choose <strong>Export Connections</strong>.</li>
+<li>Choose where to save the file.</li>
+</ol>
+<p>For one connection, you can also use <strong>Export Connection Config…</strong> in the sort and filter menu, under <strong>Selected connection</strong>. <strong>Copy Connection Config</strong> puts the same content on the clipboard.</p>
+<p>The file holds the name, type, address and color of each connection, and its network settings without any secret. Passwords are never exported.</p>
+<h3 id="import"><a class="header" href="#import">Import</a></h3>
+<ol>
+<li>Click <strong>Import / Export</strong> and choose <strong>Import tablex file…</strong>, and pick the file. Or copy a configuration and choose <strong>Paste Connection Config</strong> in the sort and filter menu.</li>
+<li>tablex shows the connections in <strong>Import Connection Configurations</strong> and says that credentials are omitted and that SSH and proxy are disabled until you configure them again.</li>
+<li>Click <strong>Import</strong>.</li>
+<li>Enter the passwords again before you connect.</li>
+</ol>
+<h2 id="where-secrets-are-stored"><a class="header" href="#where-secrets-are-stored">Where secrets are stored</a></h2>
+<p>tablex keeps saved passwords in its own database, <code>tablex.db</code>, in its data folder. They are encrypted there with AES-256-GCM. The key for this is a random master key. tablex keeps the master key in the macOS Keychain, as a single item.</p>
+<p>This covers database passwords, SSH passwords and key passphrases, proxy passwords, and AI API keys. A secret is never written to the settings file or to a log.</p>
+<p>Because there is only one Keychain item, macOS asks about one item, not about each password. Choose <strong>Always Allow</strong> when it asks.</p>
+<p>If the master key is lost, or does not match the database, tablex cannot read the saved passwords. Run <strong>Reset Saved Passwords…</strong> from the command palette. It removes every saved password and the AI key, and keeps your connections, history and settings. Then enter the passwords again.</p>
+<p>For where the data folder is, see <a href="faq.html#where-tablex-keeps-its-data">FAQ and troubleshooting</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="drivers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="tablex-mcp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="drivers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="tablex-mcp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

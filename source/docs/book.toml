@@ -1,0 +1,22 @@
+[book]
+title = "tablex documentation"
+description = "How to install and use tablex, a fast native database client for macOS."
+language = "en"
+src = "src"
+
+[build]
+build-dir = "../../docs"
+
+[output.html]
+default-theme = "coal"
+preferred-dark-theme = "coal"
+git-repository-url = "https://github.com/tablex-org/tablex"
+site-url = "/docs/"
+additional-css = ["theme/tablex.css"]
+no-section-label = true
+
+[output.html.print]
+enable = false
+
+[output.html.search]
+enable = true

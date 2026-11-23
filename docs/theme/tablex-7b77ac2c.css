@@ -1,0 +1,507 @@
+/* tablex docs: a quiet, modern docs look on top of mdBook, in the colors of the landing page
+   (bg #0f0f12, text #e8e8ec, muted #9a9aa6, line #2c2c34, accent #5b6cff). The dark theme is
+   "coal"; the light theme keeps the same accent. */
+
+:root {
+    --page-padding: 24px;
+    --content-max-width: 760px;
+    --menu-bar-height: 56px;
+    --sidebar-target-width: 272px;
+    --mono-font: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --code-font-size: 0.875em;
+    --radius: 8px;
+}
+
+.coal,
+.navy,
+.ayu {
+    --bg: #0f0f12;
+    --fg: #d6d6de;
+    --heading: #f2f2f6;
+    --muted: #9a9aa6;
+    --line: #24242b;
+    --accent: #7c88ff;
+    --accent-soft: rgba(91, 108, 255, 0.14);
+    --surface: #16161b;
+    --surface-2: #1c1c22;
+
+    --sidebar-bg: #0f0f12;
+    --sidebar-fg: #a8a8b4;
+    --sidebar-non-existant: #6f6f7a;
+    --sidebar-active: #c3c9ff;
+    --sidebar-spacer: #24242b;
+    --scrollbar: #3a3a44;
+    --icons: #9a9aa6;
+    --icons-hover: #f2f2f6;
+    --links: #8c97ff;
+    --inline-code-color: #e2e2ea;
+    --theme-popup-bg: #16161b;
+    --theme-popup-border: #2c2c34;
+    --theme-hover: #1f1f26;
+    --quote-bg: #14141a;
+    --quote-border: #5b6cff;
+    --table-border-color: #24242b;
+    --table-header-bg: #16161b;
+    --table-alternate-bg: transparent;
+    --searchbar-border-color: #2c2c34;
+    --searchbar-bg: #16161b;
+    --searchbar-fg: #e8e8ec;
+    --searchbar-shadow-color: rgba(0, 0, 0, 0.5);
+    --searchresults-header-fg: #9a9aa6;
+    --searchresults-border-color: #24242b;
+    --searchresults-li-bg: #16161b;
+    --search-mark-bg: #3b4390;
+    --footnote-highlight: #5b6cff;
+    --overlay-bg: rgba(0, 0, 0, 0.55);
+}
+
+.light,
+.rust {
+    --bg: #ffffff;
+    --fg: #34343c;
+    --heading: #111116;
+    --muted: #6b6b76;
+    --line: #e7e7ec;
+    --accent: #3f4fe0;
+    --accent-soft: rgba(63, 79, 224, 0.09);
+    --surface: #f6f6f8;
+    --surface-2: #efeff3;
+
+    --sidebar-bg: #ffffff;
+    --sidebar-fg: #4a4a54;
+    --sidebar-active: #3f4fe0;
+    --sidebar-spacer: #e7e7ec;
+    --links: #3f4fe0;
+    --inline-code-color: #1f1f26;
+    --quote-bg: #f6f6fb;
+    --quote-border: #3f4fe0;
+    --table-border-color: #e7e7ec;
+    --table-header-bg: #f6f6f8;
+    --table-alternate-bg: transparent;
+    --footnote-highlight: #3f4fe0;
+}
+
+html {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    color: var(--fg);
+}
+
+/* ---------- Menu bar ---------- */
+
+.menu-bar,
+.menu-bar.sticky {
+    height: var(--menu-bar-height);
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.menu-bar .icon-button,
+.menu-bar .right-buttons a {
+    color: var(--icons);
+}
+
+.menu-bar .left-buttons {
+    margin-inline-start: 8px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-inline-start: 6px;
+    color: var(--heading) !important;
+    text-decoration: none !important;
+    font-size: 1.7rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.brand img {
+    width: 22px;
+    height: 22px;
+}
+
+.brand .brand-docs {
+    padding: 1px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.menu-spacer {
+    flex: 1;
+}
+
+.right-buttons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-inline-end: 12px;
+}
+
+.right-buttons a.site-link {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.right-buttons a.site-link:hover {
+    color: var(--heading);
+    background: var(--surface);
+}
+
+.right-buttons a.site-link.download {
+    margin-inline: 4px 6px;
+    border: 1px solid var(--accent);
+    color: var(--heading);
+}
+
+.right-buttons a.site-link.download:hover {
+    background: var(--accent-soft);
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+    background: var(--sidebar-bg);
+    border-inline-end: 1px solid var(--line);
+    font-size: 1.45rem;
+}
+
+.sidebar .sidebar-scrollbox {
+    padding: 20px 14px 24px;
+}
+
+.chapter {
+    line-height: 1.45;
+}
+
+.chapter li.chapter-item {
+    margin-block: 1px;
+}
+
+.chapter li a,
+.chapter li .chapter-link-wrapper > a {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--sidebar-fg);
+}
+
+.chapter li a:hover {
+    color: var(--heading);
+    background: var(--surface);
+    text-decoration: none;
+}
+
+.chapter li a.active {
+    color: var(--sidebar-active);
+    background: var(--accent-soft);
+    font-weight: 550;
+}
+
+.chapter li.part-title {
+    margin: 22px 0 6px;
+    padding: 0 10px;
+    color: var(--muted);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.chapter li.part-title:first-child {
+    margin-top: 4px;
+}
+
+/* The page's own sections listed under the active chapter. */
+.chapter ol.section {
+    padding-inline-start: 10px;
+    margin-inline-start: 10px;
+    border-inline-start: 1px solid var(--line);
+}
+
+.chapter ol.section a {
+    padding-block: 4px;
+    font-size: 1.35rem;
+}
+
+/* ---------- Content ---------- */
+
+.content {
+    padding-block: 8px 48px;
+}
+
+.content main {
+    max-width: var(--content-max-width);
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4 {
+    color: var(--heading);
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+}
+
+.content h1 {
+    margin: 40px 0 12px;
+    font-size: 3.4rem;
+    letter-spacing: -0.025em;
+}
+
+.content h1 + p {
+    color: var(--muted);
+    font-size: 1.75rem;
+}
+
+.content h2 {
+    margin: 48px 0 12px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-size: 2.3rem;
+}
+
+.content h3 {
+    margin: 32px 0 8px;
+    font-size: 1.8rem;
+}
+
+.content h4 {
+    margin: 24px 0 6px;
+    font-size: 1.6rem;
+}
+
+.content a.header,
+.content a.header:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.content p,
+.content li {
+    color: var(--fg);
+}
+
+.content strong {
+    color: var(--heading);
+    font-weight: 600;
+}
+
+.content a {
+    color: var(--links);
+    text-decoration: none;
+}
+
+.content a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.content ol > li,
+.content ul > li {
+    margin-block: 0.35em;
+}
+
+.content ol > li::marker {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.content hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin-block: 32px;
+}
+
+/* ---------- Code ---------- */
+
+code {
+    font-family: var(--mono-font);
+}
+
+.content :not(pre) > code {
+    padding: 0.15em 0.4em;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--inline-code-color);
+    font-size: 0.86em;
+}
+
+.content pre {
+    margin-block: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.content pre > code,
+.content pre > code.hljs {
+    padding: 14px 16px;
+    background: var(--surface) !important;
+    font-size: 1.35rem;
+    line-height: 1.6;
+}
+
+.content pre > .buttons {
+    top: 8px;
+    right: 8px;
+}
+
+.content pre > .buttons button {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface-2);
+    color: var(--muted);
+}
+
+/* ---------- Tables ---------- */
+
+.content .table-wrapper {
+    margin-block: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow-x: auto;
+}
+
+.content table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    font-size: 1.45rem;
+}
+
+.content table thead {
+    background: var(--table-header-bg);
+}
+
+.content table th,
+.content table td {
+    padding: 9px 14px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+}
+
+.content table th {
+    color: var(--heading);
+    font-weight: 600;
+}
+
+.content table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.content table tbody tr:nth-child(2n) {
+    background: transparent;
+}
+
+/* ---------- Callouts (blockquotes) ---------- */
+
+.content blockquote {
+    margin: 20px 0;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-inline-start: 3px solid var(--quote-border);
+    border-radius: 6px;
+    background: var(--quote-bg);
+    color: var(--fg);
+}
+
+.content blockquote p {
+    margin-block: 4px;
+}
+
+/* ---------- Previous / next ---------- */
+
+.nav-chapters {
+    color: var(--muted);
+    opacity: 0.6;
+}
+
+.nav-chapters:hover {
+    color: var(--heading);
+    opacity: 1;
+    background: transparent;
+}
+
+/* ---------- Search ---------- */
+
+#mdbook-searchbar {
+    border-radius: var(--radius);
+    padding: 10px 14px;
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 620px) {
+    .brand .brand-docs,
+    .right-buttons a.site-link:not(.download) {
+        display: none;
+    }
+
+    .content h1 {
+        font-size: 2.7rem;
+    }
+
+    .content h2 {
+        font-size: 2rem;
+    }
+}
+
+/* "On this page" list under the active chapter: a thin rule, not mdBook's thick blue bar. */
+.sidebar .on-this-page {
+    margin-inline-start: 10px;
+    padding-inline-start: 0;
+    border-inline-start: 1px solid var(--line);
+}
+
+.sidebar .on-this-page > ol.section {
+    margin-inline-start: 0;
+    border-inline-start: 0;
+}
+
+.sidebar .on-this-page ol.section ol.section {
+    margin-inline-start: 8px;
+    padding-inline-start: 4px;
+    border-inline-start: 0;
+}
+
+.sidebar a.header-in-summary {
+    padding: 3px 10px;
+    color: var(--muted);
+    font-size: 1.32rem;
+}
+
+.sidebar a.header-in-summary:hover {
+    color: var(--heading);
+}
+
+.sidebar a.header-in-summary.current-header,
+.sidebar a.header-in-summary.active {
+    color: var(--sidebar-active);
+    background: transparent;
+}
