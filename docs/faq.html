@@ -8,7 +8,7 @@
 
         <!-- Custom HTML head -->
 
-        <meta name="description" content="How to install and use tablex, a fast native database client for macOS.">
+        <meta name="description" content="How to install and use tablex, a fast native database client for macOS, Linux and Windows.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#0f0f12">
 
@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "coal";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "searchindex-5fb4d6fb.js";
+            window.path_to_searchindex_js = "searchindex-7d2ff1ca.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-79bf3eb2.js"></script>
@@ -175,6 +175,13 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="faq-and-troubleshooting"><a class="header" href="#faq-and-troubleshooting">FAQ and troubleshooting</a></h1>
+<h2 id="saved-passwords-and-the-system-keyring"><a class="header" href="#saved-passwords-and-the-system-keyring">Saved passwords and the system keyring</a></h2>
+<p>On Linux and Windows, tablex keeps the master key in the system keyring (Linux) or the Credential Manager (Windows). See <a href="connections.html#where-secrets-are-stored">Where secrets are stored</a>. Two cases come up on Linux:</p>
+<ul>
+<li><strong>No keyring is running</strong> (i3, Sway, a bare X session). tablex asks once whether to keep the key in a private local file (less secure) or not to save passwords. <strong>Settings → Security</strong> changes the choice later, including moving the key back to the system keyring.</li>
+<li><strong>The keyring is locked or is another one.</strong> Unlock it. If you switch between desktops with different keyrings (for example GNOME and KDE), the key may be in the other one.</li>
+</ul>
+<p>The rest of this section is about macOS.</p>
 <h2 id="macos-asks-for-my-password-or-keychain-access"><a class="header" href="#macos-asks-for-my-password-or-keychain-access">macOS asks for my password or Keychain access</a></h2>
 <p>tablex keeps your saved passwords in its own encrypted database. A single master key opens it, and that key is one item in the macOS Keychain. See <a href="connections.html#where-secrets-are-stored">Where secrets are stored</a>.</p>
 <p>So macOS asks about one item. Choose <strong>Always Allow</strong>, not just <strong>Allow</strong>. Every release of tablex is signed with the same certificate, so what you allowed stays allowed after an update.</p>
@@ -184,27 +191,28 @@
 <li><strong>The MCP server.</strong> <code>tablex-mcp</code> is a separate program, so macOS asks once more for it. Use <strong>Allow Keychain access</strong> in <strong>Driver Manager → Tools</strong>. See <a href="tablex-mcp.html#allow-keychain-access">Allow Keychain access</a>.</li>
 <li><strong>After you update <code>tablex-mcp</code>.</strong> macOS may ask again. Run <strong>Allow Keychain access</strong> again.</li>
 </ul>
-<p>If tablex says the master key is missing, or does not match, it cannot read the saved passwords. Open the command palette (⌘K), run <strong>Reset Saved Passwords…</strong>, and enter your passwords again. This removes the saved passwords and the AI key. It keeps your connections, history and settings.</p>
+<p>If tablex says the master key is missing, or does not match, it cannot read the saved passwords. Open the command palette (⌘K / Ctrl+K), run <strong>Reset Saved Passwords…</strong>, and enter your passwords again. This removes the saved passwords and the AI key. It keeps your connections, history and settings.</p>
 <h2 id="connection-closed-connection-reset-or-broken-pipe"><a class="header" href="#connection-closed-connection-reset-or-broken-pipe">“Connection closed”, “connection reset” or “broken pipe”</a></h2>
 <p>These messages mean that the database connection ended while you were not using it. The computer slept, the network changed, or the server closed it.</p>
 <p>tablex treats these as a lost connection:</p>
 <ul>
 <li>When you run a query that only reads, tablex reconnects and runs it again by itself, once.</li>
 <li>A statement that may change data is never sent twice. tablex shows the error and a banner with <strong>Reconnect to the database</strong>. Click it.</li>
-<li>After the Mac sleeps, tablex reopens each connection the next time you use it.</li>
+<li>After the computer sleeps, tablex reopens each connection the next time you use it.</li>
 </ul>
 <p>To notice dead connections sooner, tablex checks a connection that has been idle for 60 seconds. You can change this in <strong>Settings → Query &amp; Connections</strong>, with <strong>Connection keep-alive interval</strong>. Use <code>0</code> to turn it off. A connection can have its own value in the <strong>Overrides</strong> tab of its dialog.</p>
 <p>If <strong>Reconnect</strong> fails, the server is probably not reachable. Check the host, the VPN or the SSH tunnel, then try again.</p>
 <h2 id="tablex-will-not-open"><a class="header" href="#tablex-will-not-open">tablex will not open</a></h2>
 <ul>
-<li>On the first launch, macOS asks you to confirm an app that is not notarized. See <a href="install.html#open-it-for-the-first-time">Open it for the first time</a>.</li>
-<li>tablex needs macOS 12 or later.</li>
+<li><strong>macOS:</strong> on the first launch, macOS asks you to confirm an app that is not notarized. See <a href="install.html#open-it-for-the-first-time">Open it for the first time</a>. tablex needs macOS 12 or later.</li>
+<li><strong>Windows:</strong> SmartScreen asks once, because the build is not code signed yet. Click <strong>More info</strong>, then <strong>Run anyway</strong>. tablex needs Windows 10 or 11 on x86_64.</li>
+<li><strong>Linux:</strong> tablex needs glibc 2.31 or newer, a Wayland or X11 session, and a Vulkan or OpenGL driver. When none is found, tablex says so. For an AppImage, run <code>chmod +x</code> on it first. See <a href="install.html#linux-preview">Linux</a>.</li>
 <li>If it still does not open, <a href="#report-a-bug">report it</a>.</li>
 </ul>
 <h2 id="updates"><a class="header" href="#updates">Updates</a></h2>
 <ul>
-<li><strong>Where do I check?</strong> Click the <strong>Updates</strong> button in the title bar, or choose <strong>tablex → Check for Updates…</strong>. See <a href="install.html#updates">Updates</a>.</li>
-<li><strong>I only see Download.</strong> tablex can only replace itself in a folder it can write to. Move it to <strong>Applications</strong>. See <a href="install.html#when-you-see-download-instead-of-install--restart">When you see Download instead of Install &amp; Restart</a>.</li>
+<li><strong>Where do I check?</strong> Click the <strong>Updates</strong> button in the title bar, or choose <strong>tablex → Check for Updates…</strong> on macOS. See <a href="install.html#updates">Updates</a>.</li>
+<li><strong>I only see Download.</strong> On Linux and Windows, tablex does not update itself. It opens the release page, and you install the new version there. On macOS, tablex can only replace itself in a folder it can write to. Move it to <strong>Applications</strong>. See <a href="install.html#when-you-see-download-instead-of-install--restart">When you see Download instead of Install &amp; Restart</a>.</li>
 <li><strong>I skipped a version by mistake.</strong> Open the <strong>Updates</strong> button and click <strong>Check Now</strong>. It offers the version again.</li>
 <li><strong>Drivers and tools do not update with the app.</strong> Update them in <strong>Driver Manager</strong>. A dot on the <strong>Driver Manager</strong> button means something has an update. See <a href="drivers.html#update-drivers">Update drivers</a>.</li>
 <li><strong>A driver updated, but my open connection behaves as before.</strong> Open connections keep the old driver version until you reconnect them. In <strong>Driver Manager</strong>, click the driver and then <strong>Reconnect them</strong>.</li>
@@ -212,10 +220,20 @@
 <h2 id="driver-manager-cannot-load-the-catalog"><a class="header" href="#driver-manager-cannot-load-the-catalog">Driver Manager cannot load the catalog</a></h2>
 <p>tablex needs the network to load the list of drivers. When it cannot, it shows the list it saved earlier, and an error. Check your connection and click <strong>Check for updates</strong>.</p>
 <h2 id="where-tablex-keeps-its-data"><a class="header" href="#where-tablex-keeps-its-data">Where tablex keeps its data</a></h2>
-<p>On macOS, tablex keeps its data in one folder:</p>
-<pre><code class="language-text">~/Library/Application Support/tablex
-</code></pre>
-<p>To open it, choose <strong>Go → Go to Folder…</strong> in Finder and paste the path. It holds:</p>
+<p>tablex keeps its data in one folder:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>System</th><th>Folder</th></tr>
+</thead>
+<tbody>
+<tr><td>macOS</td><td><code>~/Library/Application Support/tablex</code></td></tr>
+<tr><td>Linux</td><td><code>$XDG_DATA_HOME/tablex</code>, which is <code>~/.local/share/tablex</code> by default</td></tr>
+<tr><td>Windows</td><td><code>%APPDATA%\tablex</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>On macOS, choose <strong>Go → Go to Folder…</strong> in Finder and paste the path to open it. It holds:</p>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -223,7 +241,7 @@
 </thead>
 <tbody>
 <tr><td><code>tablex.db</code></td><td>Your saved connections, query history, diagrams, open tabs and assistant conversations, and your saved passwords and API keys in encrypted form.</td></tr>
-<tr><td><code>settings.json</code></td><td>Your settings. <strong>Settings → About</strong> shows its path.</td></tr>
+<tr><td><code>settings.json</code></td><td>Your settings. <strong>Settings → About</strong> shows its path. On Linux it is in <code>$XDG_CONFIG_HOME/tablex</code> (default <code>~/.config/tablex</code>) instead.</td></tr>
 <tr><td><code>known_hosts</code></td><td>The SSH servers whose keys you chose to trust.</td></tr>
 <tr><td><code>audit.jsonl</code></td><td>The log of what AI tools did through the assistant and <code>tablex-mcp</code>.</td></tr>
 <tr><td><code>Drivers</code></td><td>The installed drivers.</td></tr>
@@ -232,17 +250,17 @@
 </tbody>
 </table>
 </div>
-<p>The master key for the saved passwords is not in this folder. It is in the macOS Keychain.</p>
+<p>The master key for the saved passwords is not in this folder. It is in the macOS Keychain, the Linux system keyring or the Windows Credential Manager. On Linux, a key kept in a local file by your choice is <code>master.key</code> in the data folder.</p>
 <p>To keep a copy of your connections without passwords, use <strong>Export Connections</strong>. See <a href="connections.html#export-and-import-tablex-connections">Export and import tablex connections</a>.</p>
 <h2 id="report-a-bug"><a class="header" href="#report-a-bug">Report a bug</a></h2>
 <p>Use <a href="https://github.com/tablex-org/tablex/issues">GitHub issues</a>. The same place takes feature requests.</p>
 <p>Please include:</p>
 <ul>
-<li>The tablex version. Choose <strong>tablex → About tablex</strong>, or look at <strong>Settings → About</strong>.</li>
-<li>Your macOS version, and whether your Mac is Apple silicon or Intel.</li>
+<li>The tablex version. Choose <strong>tablex → About tablex</strong> on macOS, or look at <strong>Settings → About</strong>.</li>
+<li>Your operating system and its version. On a Mac, say whether it is Apple silicon or Intel. On Linux, say which desktop and session (Wayland or X11).</li>
 <li>The database type, and the version of its driver from <strong>Driver Manager</strong>.</li>
 <li>What you did, what you expected, and what happened.</li>
-<li>The relevant lines of the <strong>Error Log</strong>. Choose <strong>View → Error Log</strong> to open it.</li>
+<li>The relevant lines of the <strong>Error Log</strong>. Choose <strong>View → Error Log</strong> to open it, or run <strong>Error Log</strong> from the command palette.</li>
 </ul>
 <p>The project and its issues are public. Remove passwords, host names, addresses and anything private from what you post.</p>
 

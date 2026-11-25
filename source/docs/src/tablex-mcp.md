@@ -10,24 +10,26 @@ For each connection, you decide how far an AI tool may go. By default, it may do
 2. Click the **Tools** chip.
 3. Find **tablex MCP server** and click **Install**.
 
-tablex installs it at a path that does not change when you update it, so an MCP client keeps working after an update:
+tablex installs it at a path that does not change when you update it, so an MCP client keeps working after an update. The path is in tablex's data folder, in `tools/tablex-mcp/tablex-mcp` (`tablex-mcp.exe` on Windows). On macOS it is:
 
 ```text
 ~/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp
 ```
 
-The row shows the full path. On macOS, tablex then starts the Keychain step by itself. See [Allow Keychain access](#allow-keychain-access).
+For the data folder on Linux and Windows, see [Where tablex keeps its data](faq.md#where-tablex-keeps-its-data). The row shows the full path. On macOS, tablex then starts the Keychain step by itself. See [Allow Keychain access](#allow-keychain-access).
+
+A Linux tarball of tablex also has `bin/tablex-mcp`.
 
 <!-- screenshot: the tablex MCP server row in Driver Manager > Tools, with its buttons -->
 
 ## Connect your MCP client
 
-The installed row has three buttons: **Copy client configuration**, **Copy Claude Code command**, and **Allow Keychain access**.
+The installed row has these buttons: **Copy client configuration**, **Copy Claude Code command**, and, on macOS only, **Allow Keychain access**.
 
 ### Claude Code
 
 1. Click **Copy Claude Code command** in Driver Manager.
-2. Paste it into Terminal and run it. It looks like this, with the path of your Mac:
+2. Paste it into Terminal and run it. It looks like this, with the path of your computer. The example is for macOS:
 
 ```sh
 claude mcp add tablex -- '/Users/you/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp'
@@ -38,7 +40,7 @@ claude mcp add tablex -- '/Users/you/Library/Application Support/tablex/tools/ta
 1. Click **Copy client configuration** in Driver Manager.
 2. Paste it into the MCP server settings of your client. If the client already has an `mcpServers` section, add only the `tablex` entry to it. The clients' own documentation says where that file is.
 
-The text is this, with the path of your Mac:
+The text is this, with the path of your computer. The example is for macOS:
 
 ```json
 {
@@ -117,7 +119,11 @@ Every call an AI tool makes is written to an audit log, `audit.jsonl`, in tablex
 
 An AI tool can ask the running tablex app to open a table (`open_table`) or to show a query and run it (`execute_and_show`). tablex must be running for this. The app applies its own rules to the query.
 
+This does not work on Windows yet: there, `tablex-mcp` cannot ask the running app to open a table or a query. Everything else in `tablex-mcp` works on Windows.
+
 ## Allow Keychain access
+
+This section is for macOS. On Linux and Windows there is no such step, and no **Allow Keychain access** button. `tablex-mcp` reads the master key from the system keyring or the Credential Manager, or from the local key file on Linux if you chose that. See [Where secrets are stored](connections.md#where-secrets-are-stored).
 
 tablex keeps saved passwords encrypted, with one master key in the macOS Keychain. See [Where secrets are stored](connections.md#where-secrets-are-stored). `tablex-mcp` is a separate program, so macOS asks once whether it may read that key.
 
@@ -157,7 +163,7 @@ The messages below come from `tablex-mcp`. Your client shows them to you or to t
 
 | Message | What to do |
 | --- | --- |
-| `tablex cannot read the saved password without asking macOS (or the login keychain is locked)` | Click **Allow Keychain access** (above), then restart the client. If your login keychain is locked, unlock it first. |
+| `tablex cannot read the saved password without asking macOS (or the login keychain is locked)` | On macOS, click **Allow Keychain access** (above), then restart the client. If your login keychain is locked, unlock it first. |
 | `agent access for connection ... is ...; ... needs ... or more` | Raise the connection's level. The message names the level it has: `off`, `schema_only`, `read` or `read_write`. See [Where to set the level](#where-to-set-the-level). |
 | `... is a write ... and the agent access is ...; writes need read_write` | Set **Read and write** on the connection. Then check the conditions in [Approvals for changes](#approvals-for-changes). |
 | `changes through the MCP server are turned off in tablex: Settings → AI` | Turn on **Let MCP clients run changes**. |

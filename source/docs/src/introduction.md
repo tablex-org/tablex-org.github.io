@@ -1,8 +1,8 @@
 # Introduction
 
-tablex is a database client for macOS. It is written in Rust and built for speed: results travel from the driver to the grid as Apache Arrow, and the grid is virtualized, so it only draws the rows in view.
+tablex is a database client for macOS, Linux and Windows. It is written in Rust and built for speed: results travel from the driver to the grid as Apache Arrow, and the grid is virtualized, so it only draws the rows in view.
 
-These pages describe tablex 0.1.9.
+These pages describe tablex 0.1.11.
 
 ## Databases
 
@@ -29,10 +29,15 @@ Each database has its own driver. Drivers are not part of the app download. You 
 
 ## Requirements
 
-- macOS 12 or later.
-- A Mac with Apple silicon (M1 and later) or an Intel processor. There is a download for each.
+- **macOS:** macOS 12 or later, on a Mac with Apple silicon (M1 and later) or an Intel processor. There is a download for each.
+- **Linux (preview):** x86_64 or aarch64, glibc 2.31 or newer (Debian 11, Ubuntu 20.04, RHEL 9 and later), a Wayland or X11 session, and a Vulkan or OpenGL driver.
+- **Windows (preview):** Windows 10 or 11 on x86_64.
 
-tablex is free and open source under the AGPL-3.0 licence. There are no downloads for Linux or Windows yet; those builds are not proven.
+The Linux and Windows builds are previews. They do not update themselves: tablex tells you about a new release and opens its page. See [Install and first launch](install.md).
+
+On Linux and Windows, use Ctrl where these pages say ⌘. For example, ⌘K is Ctrl+K.
+
+tablex is free and open source under the AGPL-3.0 licence.
 
 ## Links
 

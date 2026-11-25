@@ -231,7 +231,7 @@ tablex can import connections from DBeaver, DataGrip, Navicat and DBX.
 
 Nothing is saved before you confirm. If you cancel at any step, nothing changes.
 
-Passwords are imported where the file holds them. DataGrip keeps passwords in its own keychain entries, which tablex does not read. Folders and groups of the other tools are not imported.
+Passwords are imported where the file holds them. DataGrip keeps passwords in its own credential-store entries, which tablex does not read. Folders and groups of the other tools are not imported.
 
 ## Export and import tablex connections
 
@@ -256,11 +256,19 @@ The file holds the name, type, address and color of each connection, and its net
 
 ## Where secrets are stored
 
-tablex keeps saved passwords in its own database, `tablex.db`, in its data folder. They are encrypted there with AES-256-GCM. The key for this is a random master key. tablex keeps the master key in the macOS Keychain, as a single item.
+tablex keeps saved passwords in its own database, `tablex.db`, in its data folder. They are encrypted there with AES-256-GCM. The key for this is a random master key. tablex keeps the master key in your system's credential store, as a single item:
+
+| System | Where the master key is |
+| --- | --- |
+| macOS | The Keychain. |
+| Linux | The system keyring (Secret Service: GNOME Keyring, KWallet or KeePassXC). |
+| Windows | The Credential Manager. |
+
+On Linux without a keyring, tablex asks once whether to keep the key in a private local file, `master.key` in its data folder (less secure), or not to save passwords. **Settings → Security** changes this later.
 
 This covers database passwords, SSH passwords and key passphrases, proxy passwords, and AI API keys. A secret is never written to the settings file or to a log.
 
-Because there is only one Keychain item, macOS asks about one item, not about each password. Choose **Always Allow** when it asks.
+Because there is only one item, macOS asks about one item, not about each password. Choose **Always Allow** when it asks.
 
 If the master key is lost, or does not match the database, tablex cannot read the saved passwords. Run **Reset Saved Passwords…** from the command palette. It removes every saved password and the AI key, and keeps your connections, history and settings. Then enter the passwords again.
 

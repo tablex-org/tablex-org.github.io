@@ -8,7 +8,7 @@
 
         <!-- Custom HTML head -->
 
-        <meta name="description" content="How to install and use tablex, a fast native database client for macOS.">
+        <meta name="description" content="How to install and use tablex, a fast native database client for macOS, Linux and Windows.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#0f0f12">
 
@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "coal";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "searchindex-5fb4d6fb.js";
+            window.path_to_searchindex_js = "searchindex-7d2ff1ca.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-79bf3eb2.js"></script>
@@ -183,17 +183,18 @@
 <li>Click the <strong>Tools</strong> chip.</li>
 <li>Find <strong>tablex MCP server</strong> and click <strong>Install</strong>.</li>
 </ol>
-<p>tablex installs it at a path that does not change when you update it, so an MCP client keeps working after an update:</p>
+<p>tablex installs it at a path that does not change when you update it, so an MCP client keeps working after an update. The path is in tablex’s data folder, in <code>tools/tablex-mcp/tablex-mcp</code> (<code>tablex-mcp.exe</code> on Windows). On macOS it is:</p>
 <pre><code class="language-text">~/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp
 </code></pre>
-<p>The row shows the full path. On macOS, tablex then starts the Keychain step by itself. See <a href="#allow-keychain-access">Allow Keychain access</a>.</p>
+<p>For the data folder on Linux and Windows, see <a href="faq.html#where-tablex-keeps-its-data">Where tablex keeps its data</a>. The row shows the full path. On macOS, tablex then starts the Keychain step by itself. See <a href="#allow-keychain-access">Allow Keychain access</a>.</p>
+<p>A Linux tarball of tablex also has <code>bin/tablex-mcp</code>.</p>
 <!-- screenshot: the tablex MCP server row in Driver Manager > Tools, with its buttons -->
 <h2 id="connect-your-mcp-client"><a class="header" href="#connect-your-mcp-client">Connect your MCP client</a></h2>
-<p>The installed row has three buttons: <strong>Copy client configuration</strong>, <strong>Copy Claude Code command</strong>, and <strong>Allow Keychain access</strong>.</p>
+<p>The installed row has these buttons: <strong>Copy client configuration</strong>, <strong>Copy Claude Code command</strong>, and, on macOS only, <strong>Allow Keychain access</strong>.</p>
 <h3 id="claude-code"><a class="header" href="#claude-code">Claude Code</a></h3>
 <ol>
 <li>Click <strong>Copy Claude Code command</strong> in Driver Manager.</li>
-<li>Paste it into Terminal and run it. It looks like this, with the path of your Mac:</li>
+<li>Paste it into Terminal and run it. It looks like this, with the path of your computer. The example is for macOS:</li>
 </ol>
 <pre><code class="language-sh">claude mcp add tablex -- '/Users/you/Library/Application Support/tablex/tools/tablex-mcp/tablex-mcp'
 </code></pre>
@@ -202,7 +203,7 @@
 <li>Click <strong>Copy client configuration</strong> in Driver Manager.</li>
 <li>Paste it into the MCP server settings of your client. If the client already has an <code>mcpServers</code> section, add only the <code>tablex</code> entry to it. The clients’ own documentation says where that file is.</li>
 </ol>
-<p>The text is this, with the path of your Mac:</p>
+<p>The text is this, with the path of your computer. The example is for macOS:</p>
 <pre><code class="language-json">{
   "mcpServers": {
     "tablex": {
@@ -268,7 +269,9 @@
 <p>Every call an AI tool makes is written to an audit log, <code>audit.jsonl</code>, in tablex’s data folder.</p>
 <h3 id="show-something-in-tablex"><a class="header" href="#show-something-in-tablex">Show something in tablex</a></h3>
 <p>An AI tool can ask the running tablex app to open a table (<code>open_table</code>) or to show a query and run it (<code>execute_and_show</code>). tablex must be running for this. The app applies its own rules to the query.</p>
+<p>This does not work on Windows yet: there, <code>tablex-mcp</code> cannot ask the running app to open a table or a query. Everything else in <code>tablex-mcp</code> works on Windows.</p>
 <h2 id="allow-keychain-access"><a class="header" href="#allow-keychain-access">Allow Keychain access</a></h2>
+<p>This section is for macOS. On Linux and Windows there is no such step, and no <strong>Allow Keychain access</strong> button. <code>tablex-mcp</code> reads the master key from the system keyring or the Credential Manager, or from the local key file on Linux if you chose that. See <a href="connections.html#where-secrets-are-stored">Where secrets are stored</a>.</p>
 <p>tablex keeps saved passwords encrypted, with one master key in the macOS Keychain. See <a href="connections.html#where-secrets-are-stored">Where secrets are stored</a>. <code>tablex-mcp</code> is a separate program, so macOS asks once whether it may read that key.</p>
 <p>While <code>tablex-mcp</code> runs for a client, it never lets macOS ask. A dialog would appear behind your client, and the AI tool would wait for it. So you answer the question once, in advance.</p>
 <ol>
@@ -299,7 +302,7 @@
 <tr><th>Message</th><th>What to do</th></tr>
 </thead>
 <tbody>
-<tr><td><code>tablex cannot read the saved password without asking macOS (or the login keychain is locked)</code></td><td>Click <strong>Allow Keychain access</strong> (above), then restart the client. If your login keychain is locked, unlock it first.</td></tr>
+<tr><td><code>tablex cannot read the saved password without asking macOS (or the login keychain is locked)</code></td><td>On macOS, click <strong>Allow Keychain access</strong> (above), then restart the client. If your login keychain is locked, unlock it first.</td></tr>
 <tr><td><code>agent access for connection ... is ...; ... needs ... or more</code></td><td>Raise the connection’s level. The message names the level it has: <code>off</code>, <code>schema_only</code>, <code>read</code> or <code>read_write</code>. See <a href="#where-to-set-the-level">Where to set the level</a>.</td></tr>
 <tr><td><code>... is a write ... and the agent access is ...; writes need read_write</code></td><td>Set <strong>Read and write</strong> on the connection. Then check the conditions in <a href="#approvals-for-changes">Approvals for changes</a>.</td></tr>
 <tr><td><code>changes through the MCP server are turned off in tablex: Settings → AI</code></td><td>Turn on <strong>Let MCP clients run changes</strong>.</td></tr>

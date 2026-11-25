@@ -1,6 +1,6 @@
 [book]
 title = "tablex documentation"
-description = "How to install and use tablex, a fast native database client for macOS."
+description = "How to install and use tablex, a fast native database client for macOS, Linux and Windows."
 language = "en"
 src = "src"
 

@@ -6,7 +6,7 @@ The assistant needs an AI provider that you choose. You enter your own API key, 
 
 ## Set it up
 
-1. Open **Settings → AI Assistant**. In the menu bar, choose **tablex → Settings…**.
+1. Open **Settings → AI Assistant**. On macOS, choose **tablex → Settings…** in the menu bar. On Linux and Windows, open the command palette (Ctrl+K) and run **Settings**.
 2. Choose a **Provider**:
    - **Anthropic**
    - **OpenAI**
@@ -56,7 +56,7 @@ Do one of these:
 
 - Click **Assistant** in the title bar.
 - Choose **View → AI Assistant**.
-- Press ⇧⌘A.
+- Press ⇧⌘A (Ctrl+Shift+A on Linux and Windows).
 
 The chat is about the connection of the tab you have open. If you switch to a tab of another connection, the panel offers **New chat for** that connection.
 

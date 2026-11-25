@@ -17,8 +17,8 @@ You manage drivers in **Driver Manager**.
 Do one of these:
 
 - Click **Driver Manager** in the title bar.
-- Choose **tablex → Driver Manager…** in the menu bar.
-- Open the command palette (⌘K or ⌘P) and run **Driver Manager**.
+- Choose **tablex → Driver Manager…** in the menu bar (macOS).
+- Open the command palette (⌘K or ⌘P, Ctrl+K or Ctrl+P on Linux and Windows) and run **Driver Manager**.
 
 Driver Manager opens in a tab.
 
@@ -67,7 +67,7 @@ Open the **⋯** menu of an installed driver. It has:
 - **Uninstall**
 - **Reinstall**
 - **Roll back to previous version**
-- **Show in Finder**
+- **Show in Finder** (it opens the folder in your file manager on Linux and Windows)
 - **Copy details**
 
 If open connections use the driver, tablex lists them and asks first. It disconnects them before it disables or removes the driver. Your saved connections are not deleted.
